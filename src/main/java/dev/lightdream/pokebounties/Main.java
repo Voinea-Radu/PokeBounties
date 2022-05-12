@@ -5,14 +5,20 @@ import dev.lightdream.filemanager.FileManagerMain;
 import dev.lightdream.logger.LoggableMain;
 import dev.lightdream.logger.Logger;
 import dev.lightdream.messagebuilder.MessageBuilderManager;
+import dev.lightdream.pokebounties.database.User;
 import dev.lightdream.pokebounties.dto.Data;
 import dev.lightdream.pokebounties.dto.config.Config;
 import dev.lightdream.pokebounties.dto.config.PokemonList;
+import dev.lightdream.pokebounties.manager.ForgeEventManager;
+import dev.lightdream.pokebounties.manager.QuestManager;
+import dev.lightdream.pokebounties.manager.ScheduleManager;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
+import org.spongepowered.api.event.game.state.GameStartingServerEvent;
 import org.spongepowered.api.plugin.Plugin;
 
 import java.io.File;
+import java.util.UUID;
 
 @Plugin(
         id = "pokebounties",
@@ -26,6 +32,7 @@ public class Main implements FileManagerMain, LoggableMain {
 
     // Static
     public static Main instance;
+    public static User developer = new User(UUID.randomUUID(), "_LightDream");
 
     // Config & Data
     public Data data;
@@ -34,6 +41,9 @@ public class Main implements FileManagerMain, LoggableMain {
 
     // Manager
     public FileManager fileManager;
+    public ForgeEventManager forgeEventManager;
+    public QuestManager questManager;
+    public ScheduleManager scheduleManager;
 
     @Listener
     public void onServerStart(GameStartedServerEvent event) {
@@ -43,6 +53,15 @@ public class Main implements FileManagerMain, LoggableMain {
         fileManager = new FileManager(this);
         MessageBuilderManager.init(fileManager);
         loadConfigs();
+
+        questManager = new QuestManager();
+        forgeEventManager = new ForgeEventManager();
+        scheduleManager = new ScheduleManager();
+    }
+
+    @Listener
+    public void onEnable(GameStartingServerEvent event) {
+        forgeEventManager = new ForgeEventManager();
     }
 
     private void loadConfigs() {

@@ -77,10 +77,6 @@ dependencies {
     compile "dev.lightdream:MessageBuilder:2.1.10"
     compile "dev.lightdream:Logger:2.3.2"
 
-    // https://mvnrepository.com/artifact/org.projectlombok/lombok
-    compileOnly 'org.projectlombok:lombok:1.18.24'
-
-
 }
 
 reobf {

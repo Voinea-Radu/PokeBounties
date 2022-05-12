@@ -1,15 +1,30 @@
 package dev.lightdream.pokebounties.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import dev.lightdream.messagebuilder.MessageBuilder;
+import org.spongepowered.api.Sponge;
+import org.spongepowered.api.text.Text;
 
-@AllArgsConstructor
-@NoArgsConstructor
 public class RewardLevel {
 
     public String title;
     public String description;
-    public String command;
+    public MessageBuilder command;
 
+    public RewardLevel(String title, String description, MessageBuilder command) {
+        this.title = title;
+        this.description = description;
+        this.command = command;
+    }
+
+    public RewardLevel() {
+    }
+
+    public void give(String username) {
+        Sponge.getServer().getConsole().sendMessage(Text.of(
+                command
+                        .parse("player", username)
+                        .parse()
+        ));
+    }
 
 }
