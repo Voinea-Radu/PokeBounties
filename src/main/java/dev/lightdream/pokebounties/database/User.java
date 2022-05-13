@@ -3,6 +3,7 @@ package dev.lightdream.pokebounties.database;
 import com.pixelmongenerations.core.enums.EnumSpecies;
 import dev.lightdream.logger.Debugger;
 import dev.lightdream.pokebounties.Main;
+import dev.lightdream.pokebounties.api.BountyUser;
 import dev.lightdream.pokebounties.dto.Quest;
 import dev.lightdream.pokebounties.utils.Utils;
 import org.spongepowered.api.entity.living.player.Player;
@@ -10,30 +11,38 @@ import org.spongepowered.api.entity.living.player.Player;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class User {
+public class User implements BountyUser {
 
     public UUID uuid;
     public String name;
-    public String date;
-    public HashMap<String, Integer> levelFinished;
+    public HashMap<String, Integer> levelFinished; // Species, level
 
     public User(UUID uuid, String name) {
         this.uuid = uuid;
         this.name = name;
-        this.date = Utils.getDateString();
         this.levelFinished = new HashMap<>();
     }
 
     public static User getUser(Player player) {
-        return Main.developer;
+        return Main.developer; // TODO
     }
 
-    public int getLevelToFinish(Quest quest) {
+    private int getLevelToFinish(Quest quest) {
         return this.levelFinished.getOrDefault(quest.pokemon, 0);
     }
 
-    public int getPokemonLevel(Quest quest) {
+    private int getPokemonLevel(Quest quest) {
         return Main.instance.config.getPokeMonLevel(getLevelToFinish(quest));
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public UUID getUUID() {
+        return uuid;
     }
 
     public void finishLevel(Quest quest, EnumSpecies species, int level) {
@@ -52,11 +61,15 @@ public class User {
     }
 
     @Override
+    public int getLevelOfQuest(Quest quest) {
+        return levelFinished.getOrDefault(quest.pokemon, 0);
+    }
+
+    @Override
     public String toString() {
         return "User{" +
                 "uuid=" + uuid +
                 ", name='" + name + '\'' +
-                ", date='" + date + '\'' +
                 ", levelFinished=" + levelFinished +
                 '}';
     }
