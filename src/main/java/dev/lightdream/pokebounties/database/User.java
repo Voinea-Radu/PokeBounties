@@ -5,7 +5,6 @@ import dev.lightdream.logger.Debugger;
 import dev.lightdream.pokebounties.Main;
 import dev.lightdream.pokebounties.api.BountyUser;
 import dev.lightdream.pokebounties.dto.Quest;
-import dev.lightdream.pokebounties.utils.Utils;
 import org.spongepowered.api.entity.living.player.Player;
 
 import java.util.HashMap;

@@ -16,6 +16,7 @@ public class RewardLevel {
         this.command = command;
     }
 
+    @SuppressWarnings("unused")
     public RewardLevel() {
     }
 

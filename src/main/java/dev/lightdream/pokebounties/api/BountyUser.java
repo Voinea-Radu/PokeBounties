@@ -9,10 +9,12 @@ public interface BountyUser {
 
     String getName();
 
+    @SuppressWarnings("unused")
     UUID getUUID();
 
     void finishLevel(Quest quest, EnumSpecies species, int level);
 
+    @SuppressWarnings("unused")
     int getLevelOfQuest(Quest quest);
 
 }

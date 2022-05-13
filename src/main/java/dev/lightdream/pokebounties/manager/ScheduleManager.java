@@ -59,9 +59,8 @@ public class ScheduleManager {
             }
         });
 
-        remove.forEach(key -> {
-            Main.instance.data.deleteQuest(key);
-        });
+        remove.forEach(key ->
+                Main.instance.data.deleteQuest(key));
     }
 
     private DailyQuest generateDailyQuest() {

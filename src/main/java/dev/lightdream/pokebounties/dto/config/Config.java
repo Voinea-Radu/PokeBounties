@@ -12,24 +12,6 @@ public class Config {
 
     public boolean debug = true;
     public int dailyQuests = 2;
-
-    @Expose
-    private HashMap<Integer, Integer> pokemonLevels = new HashMap<Integer, Integer>() {{
-        put(1, 5);
-        put(2, 10);
-        put(3, 15);
-        put(4, 20);
-        put(5, 25);
-        put(6, 30);
-        put(7, 35);
-        put(8, 40);
-        put(9, 45);
-    }}; // Quest Level -> Pokemon Level
-
-    public int getPokeMonLevel(int questLevel) {
-        return pokemonLevels.getOrDefault(questLevel, -1);
-    }
-
     public HashMap<Integer, Reward> questRewards = new HashMap<Integer, Reward>() {{
         put(1, new Reward(Arrays.asList(
                 new RewardLevel("One epic command", "This reward is going to make the server say a number", new MessageBuilder("say 1.1")),
@@ -77,5 +59,21 @@ public class Config {
                 new RewardLevel("One epic command", "This reward is going to make the server say a number", new MessageBuilder("say 9.3"))
         )));
     }}; // Quest Level -> List of possible Rewards
+    @Expose
+    private HashMap<Integer, Integer> pokemonLevels = new HashMap<Integer, Integer>() {{
+        put(1, 5);
+        put(2, 10);
+        put(3, 15);
+        put(4, 20);
+        put(5, 25);
+        put(6, 30);
+        put(7, 35);
+        put(8, 40);
+        put(9, 45);
+    }}; // Quest Level -> Pokemon Level
+
+    public int getPokeMonLevel(int questLevel) {
+        return pokemonLevels.getOrDefault(questLevel, -1);
+    }
 
 }

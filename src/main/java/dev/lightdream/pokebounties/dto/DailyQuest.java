@@ -6,6 +6,7 @@ public class DailyQuest {
 
     public List<Quest> quests;
 
+    @SuppressWarnings("unused")
     public DailyQuest() {
     }
 

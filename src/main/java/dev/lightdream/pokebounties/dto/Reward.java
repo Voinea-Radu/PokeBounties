@@ -10,6 +10,7 @@ public class Reward {
         this.rewards = rewards;
     }
 
+    @SuppressWarnings("unused")
     public Reward() {
     }
 }

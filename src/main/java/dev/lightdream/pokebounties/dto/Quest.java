@@ -10,6 +10,7 @@ public class Quest {
         this.reward = reward;
     }
 
+    @SuppressWarnings("unused")
     public Quest() {
     }
 }
