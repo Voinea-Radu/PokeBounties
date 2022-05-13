@@ -13,4 +13,11 @@ public class Reward {
     @SuppressWarnings("unused")
     public Reward() {
     }
+
+    @Override
+    public String toString() {
+        return "Reward{" +
+                "rewards=" + rewards +
+                '}';
+    }
 }

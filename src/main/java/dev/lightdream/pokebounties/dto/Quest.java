@@ -13,4 +13,12 @@ public class Quest {
     @SuppressWarnings("unused")
     public Quest() {
     }
+
+    @Override
+    public String toString() {
+        return "Quest{" +
+                "pokemon='" + pokemon + '\'' +
+                ", reward=" + reward +
+                '}';
+    }
 }

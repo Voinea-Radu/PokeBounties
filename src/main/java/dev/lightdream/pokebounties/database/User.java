@@ -21,13 +21,12 @@ public class User extends IntegerDatabaseEntry implements BountyUser {
     @DatabaseField(columnName = "name")
     public String name;
     @DatabaseField(columnName = "level_finished")
-    public HashMap<String, Integer> levelFinished; // Species, level
+    public HashMap<String, Integer> levelFinished = new HashMap<>(); // Species, level
 
     public User(UUID uuid, String name) {
         super(Main.instance);
         this.uuid = uuid;
         this.name = name;
-        this.levelFinished = new HashMap<>();
     }
 
     public User() {
@@ -43,7 +42,7 @@ public class User extends IntegerDatabaseEntry implements BountyUser {
     }
 
     private int getLevelToFinish(Quest quest) {
-        return this.levelFinished.getOrDefault(quest.pokemon, 0);
+        return this.levelFinished.getOrDefault(quest.pokemon, 0) + 1;
     }
 
     private int getPokemonLevel(Quest quest) {
@@ -63,14 +62,25 @@ public class User extends IntegerDatabaseEntry implements BountyUser {
     public void finishLevel(Quest quest, EnumSpecies species, int level) {
         Debugger.log("Finish level " + level + " for " + species.name);
         if (getPokemonLevel(quest) != level) {
+            Debugger.log("[1] Level is not correct " + getPokemonLevel(quest) + " != " + level);
             return;
         }
 
         if (!quest.pokemon.equals(species.toString())) {
+            Debugger.log(2);
             return;
         }
 
+        Debugger.log(3);
         this.levelFinished.put(quest.pokemon, this.levelFinished.getOrDefault(quest.pokemon, 0) + 1);
+        Debugger.log(quest);
+        Debugger.log(quest.reward);
+        Debugger.log(quest.reward.rewards);
+        Debugger.log(this.levelFinished);
+        Debugger.log(quest.pokemon);
+        Debugger.log(this.levelFinished.get(quest.pokemon));
+        Debugger.log(quest.reward.rewards.get(this.levelFinished.get(quest.pokemon)));
+        Debugger.log(this.name);
         quest.reward.rewards.get(this.levelFinished.get(quest.pokemon)).give(this.name);
         Debugger.log(this);
         save();

@@ -1,6 +1,7 @@
 package dev.lightdream.pokebounties.manager;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import dev.lightdream.databasemanager.database.ProgrammaticHikariDatabaseManager;
 import dev.lightdream.databasemanager.dto.QueryConstrains;
 import dev.lightdream.pokebounties.Main;
@@ -9,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.api.entity.living.player.Player;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -23,10 +25,15 @@ public class DatabaseManager extends ProgrammaticHikariDatabaseManager {
     public void setup() {
         registerDataType(HashMap.class, "TEXT");
 
+        Type type = new TypeToken<HashMap<String, Integer>>(){}.getType();
+
         registerSDPair(
                 HashMap.class,
-                map -> new Gson().toJson(map),
-                json -> new Gson().fromJson(json.toString(), HashMap.class)
+                map -> {
+                    HashMap<String, Integer> mmap = map;
+                    return "\"" + new Gson().toJson(mmap).replace("\"", "'") + "\"";
+                },
+                json -> new Gson().fromJson(json.toString().replace("'", "\""), type)
         );
 
         setup(User.class);

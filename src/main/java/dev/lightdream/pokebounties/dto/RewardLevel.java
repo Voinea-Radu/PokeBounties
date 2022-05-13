@@ -28,4 +28,12 @@ public class RewardLevel {
         ));
     }
 
+    @Override
+    public String toString() {
+        return "RewardLevel{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", command=" + command +
+                '}';
+    }
 }
