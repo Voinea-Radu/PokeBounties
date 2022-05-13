@@ -20,7 +20,7 @@ public class ScheduleManager {
         registerDailyGeneration();
     }
 
-    public void registerDailyGeneration() {
+    private void registerDailyGeneration() {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -28,7 +28,7 @@ public class ScheduleManager {
                 Debugger.log("Generating daily quests...");
                 checkGenerationNeeds();
             }
-        }, 0, 60 * 1000);
+        }, 0, 24 * 60 * 60 * 1000); // 1 day
     }
 
     private void checkGenerationNeeds() {

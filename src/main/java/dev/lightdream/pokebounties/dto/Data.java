@@ -1,11 +1,14 @@
 package dev.lightdream.pokebounties.dto;
 
 import dev.lightdream.pokebounties.Main;
+import dev.lightdream.pokebounties.database.User;
 import dev.lightdream.pokebounties.utils.Utils;
+import org.spongepowered.api.entity.living.player.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 public class Data {
 
